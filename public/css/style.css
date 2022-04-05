@@ -1,0 +1,47 @@
+header, .blogpost:not(:last-child) {
+  border-bottom: 2px solid rgb(17, 9, 9);
+}
+
+header {
+  background-color: #b9b3b3;
+  padding-left: 50px;
+  padding-right: 10px;
+}
+
+.declare {
+  margin: 20px;
+  font-weight: 900;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comments-section {
+  background-color: #b9b3b3;
+  margin: 20px;
+  padding: 10px;
+}
+
+.comment {
+  background-color: #b9b3b3;
+  margin: 20px;
+}
+
+.blogpost {
+  margin: 20px;
+}
+
+.no-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #bc2e1b;
+  text-decoration: none;
+  font-size: 100%;
+}
+
+.no-button:hover {
+  color: #bc961b;
+  text-decoration: underline;
+}
