@@ -24,6 +24,9 @@ router.get("/", async (req, res) => {
     } else {
       // TODO: Build this to make the snodeData only the top favorited snodes
       snodeData = await Codesnip.findAll({
+        // attributes: [
+        //   [sequelize.literal('(SELECT COUNT(*))')]
+        // ],
         include: [
           {
             model: User,
