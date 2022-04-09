@@ -16,31 +16,31 @@ User.hasMany(Codesnip, {
 
 // CONSIDER if current Fails
 
-// User.belongsToMany(Codesnip, {
-//   through: Favorite,
+User.belongsToMany(Codesnip, {
+  through: Favorite,
+});
+
+Codesnip.belongsToMany(User, {
+  through: Favorite,
+});
+
+// Favorite.hasMany(User, {
+//   foreignKey: 'user_id',
+//   onDelete: "SET NULL",
 // });
 
-// Codesnip.belongsToMany(User, {
-//   through: Favorite,
+// User.belongsTo(Favorite, {
+//   foreignKey: 'user_id',
+// })
+
+// Favorite.hasMany(Codesnip, {
+//   foreignKey: 'codesnip_id',
+//   onDelete: "SET NULL",
 // });
 
-Favorite.hasMany(User, {
-  foreignKey: 'user_id',
-  onDelete: "SET NULL",
-});
-
-User.belongsTo(Favorite, {
-  foreignKey: 'user_id',
-})
-
-Favorite.hasMany(Codesnip, {
-  foreignKey: 'codesnip_id',
-  onDelete: "SET NULL",
-});
-
-Codesnip.belongsTo(Favorite, {
-  foreignKey: 'codesnip_id',
-});
+// Codesnip.belongsTo(Favorite, {
+//   foreignKey: 'codesnip_id',
+// });
 
 Tag.belongsToMany(Codesnip, {
   through: Codesniptag,
