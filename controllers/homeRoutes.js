@@ -41,7 +41,8 @@ router.get("/", async (req, res) => {
       snodes,
       logged_in: req.session.logged_in,
     });
-    // res.json(blogpost);
+
+    // res.json(snodes);
   } catch (err) {
     res.status(500).json(err);
   }
