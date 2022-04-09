@@ -75,6 +75,51 @@ router.get("/favsnodes", withAuth, async (req, res) => {
   }
 });
 
+// Gets the requested user's favorite snodes and personal snodes and sends them to the profile.handlebars
+router.get("/profile/:id", withAuth, async (req, res) => {
+  try {
+    favSnodeData = await Favorite.findAll({
+      where: {
+        user_id: req.params.id,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+        {
+          model: Codesnip,
+        },
+      ],
+    });
+
+      personalSnodeData = await Codesnip.findAll({
+        where: {
+          user_id: req.params.id,
+        },
+        include: [
+          {
+            model: User,
+            attributes: ["name"],
+          },
+        ],
+      });
+
+    const favSnodes = favSnodeData.map((snode) => snode.get({plain: true}));
+    const personalSnodes = personalSnodeData.map((snode) => snode.get({plain: true}));
+
+    // Pass serialized data and session flag into template
+    res.render("profile", {
+      personalSnodes,
+      favSnodes,
+      logged_in: req.session.logged_in,
+    });
+    // res.json(blogpost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // Sends user to the page to draft up a new snode
 router.get("/draftsnode", withAuth, async (req, res) => {
   try {
@@ -86,6 +131,8 @@ router.get("/draftsnode", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
 
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
