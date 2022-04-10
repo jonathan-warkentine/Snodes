@@ -52,76 +52,114 @@ router.get("/", async (req, res) => {
 // Gets the current user's favorited snodes and pushes them to favsnodes.handlebars
 router.get("/favsnodes", withAuth, async (req, res) => {
   try {
-    snodeData = await Favorite.findAll({
+    allData = await User.findAll({
       where: {
-        user_id: req.session.user_id,
+        id: req.session.user_id,
+      },
+    });
+
+    const allData2 = allData.map((user) => user.get({plain: true}));
+
+    const favString = allData2[0].favorites;
+    const favArrStrings = favString.split(",");
+    const favArr = favArrStrings.map((element) => parseInt(element));
+
+    const arrFavObj = favArr.reduce(function (acc, favId) {
+      return [...acc, {id: favId}];
+    }, []);
+
+    favSnodeData = await Codesnip.findAll({
+      where: {
+        [Op.or]: arrFavObj,
       },
       include: [
         {
           model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Codesnip,
-        },
-      ],
-    });
-
-    const snodes = snodeData.map((snode) => snode.get({plain: true}));
-
-    // Pass serialized data and session flag into template
-    res.render("favsnodes", {
-      snodes,
-      logged_in: req.session.logged_in,
-    });
-    // res.json(blogpost);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// Gets the requested user's favorite snodes and personal snodes and sends them to the profile.handlebars
-router.get("/profile/:id", withAuth, async (req, res) => {
-  try {
-    favSnodeData = await Favorite.findAll({
-      where: {
-        user_id: req.params.id,
-      },
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-        {
-          model: Codesnip,
-        },
-      ],
-    });
-
-    personalSnodeData = await Codesnip.findAll({
-      where: {
-        user_id: req.params.id,
-      },
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
         },
       ],
     });
 
     const favSnodes = favSnodeData.map((snode) => snode.get({plain: true}));
-    const personalSnodes = personalSnodeData.map((snode) =>
-      snode.get({plain: true})
-    );
 
-    // Pass serialized data and session flag into template
-    res.render("profile", {
-      personalSnodes,
-      favSnodes,
-      logged_in: req.session.logged_in,
+    // // Pass serialized data and session flag into template
+    // res.render("favsnodes", {
+    //   favSnodes,
+    //   logged_in: req.session.logged_in,
+    // });
+
+    res.json(favSnodes);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/profile/:id", withAuth, async (req, res) => {
+  try {
+
+    personalSnodeData = await Codesnip.findAll({
+      where: {
+        user_id: req.params.id
+      },
+      include: [
+        {
+          model: User,
+        },
+      ],
     });
-    // res.json(blogpost);
+
+    const personalSnodes = personalSnodeData.map((snode) => snode.get({plain: true}));
+
+    // // Pass serialized data and session flag into template
+    // res.render("profile", {
+    //   personalSnodes,
+    //   logged_in: req.session.logged_in,
+    // });
+
+    res.json(personalSnodes);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Gets the requested user's favorite snodes sends them to the profile.handlebars PERSONAL
+router.get("/profile/favorite/:id", withAuth, async (req, res) => {
+  try {
+    allData = await User.findAll({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    const allData2 = allData.map((user) => user.get({plain: true}));
+
+    const favString = allData2[0].favorites;
+    const favArrStrings = favString.split(",");
+    const favArr = favArrStrings.map((element) => parseInt(element));
+
+    const arrFavObj = favArr.reduce(function (acc, favId) {
+      return [...acc, {id: favId}];
+    }, []);
+
+    favSnodeData = await Codesnip.findAll({
+      where: {
+        [Op.or]: arrFavObj,
+      },
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
+
+    const favSnodes = favSnodeData.map((snode) => snode.get({plain: true}));
+
+    // // Pass serialized data and session flag into template
+    // res.render("profile", {
+    //   favSnodes,
+    //   logged_in: req.session.logged_in,
+    // });
+
+    res.json(favSnodes);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -150,13 +188,11 @@ router.get("/login", (req, res) => {
 });
 
 //
-// TESTING: NO CHANGES WERE MADE ABOVE THIS
-// Except: Favorites was removed from imports
+// TESTING:
+//
 //
 router.get("/testing/:id", async (req, res) => {
   try {
-    // snodeData = await User.findByPk(req.params.id);
-
     allData = await User.findAll({
       where: {
         id: req.params.id,
@@ -173,19 +209,22 @@ router.get("/testing/:id", async (req, res) => {
       return [...acc, {id: favId}];
     }, []);
 
-    favSnodeData = await Codesnip.findAll(
-      {
+    favSnodeData = await Codesnip.findAll({
       where: {
         [Op.or]: arrFavObj,
       },
-    }
-    );
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
 
     const favSnodes = favSnodeData.map((snode) => snode.get({plain: true}));
 
     // // Pass serialized data and session flag into template
     // res.render("favsnodes", {
-    //   snodes,
+    //   favSnodes,
     //   logged_in: req.session.logged_in,
     // });
 
