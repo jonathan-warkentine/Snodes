@@ -125,7 +125,6 @@ router.get("/tags", async (req, res) => {
           model: Codesnip,
         },
       ],
-      limit: 10,
     });
     tags = tagData.map((tag) => tag.get({plain: true}));
     tags.forEach((tag) => {
@@ -286,46 +285,42 @@ router.get("/login", (req, res) => {
 
 //
 // TESTING:
+// Search by Tag Id
 //
-//
-router.get("/testing/:id", async (req, res) => {
+router.get("/testing/:search", async (req, res) => {
   try {
-    allData = await User.findAll({
-      where: {
-        id: req.params.id,
-      },
-    });
-
-    const allData2 = allData.map((user) => user.get({plain: true}));
-
-    const favString = allData2[0].favorites;
-    const favArrStrings = favString.split(",");
-    const favArr = favArrStrings.map((element) => parseInt(element));
-
-    const arrFavObj = favArr.reduce(function (acc, favId) {
+    
+    const searchArr = req.params.search.split('&');
+    
+    const searchArrObj = searchArr.reduce(function (acc, favId) {
       return [...acc, {id: favId}];
     }, []);
 
-    favSnodeData = await Codesnip.findAll({
+    // Query: Find all Tags with any of the search parameters. Include the codesnips associated. Include the user associated with each codesnip.
+    codesnipData = await Tag.findAll({
       where: {
-        [Op.or]: arrFavObj,
+        [Op.or]: searchArrObj,
       },
       include: [
         {
-          model: User,
+          model: Codesnip,
+          include: [{
+            model: User,
+          }]
         },
       ],
     });
 
-    const favSnodes = favSnodeData.map((snode) => snode.get({plain: true}));
+
+    const searchResults = codesnipData.map((snode) => snode.get({plain: true}));
 
     // // Pass serialized data and session flag into template
-    // res.render("favsnodes", {
-    //   favSnodes,
+    // res.render("searchresults", {
+    //   searchResults,
     //   logged_in: req.session.logged_in,
     // });
 
-    res.json(favSnodes);
+    res.json(searchResults);
   } catch (err) {
     res.status(500).json(err);
   }
