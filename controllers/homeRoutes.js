@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     if (req.session.logged_in) {
       allData = await User.findAll({
         where: {
-          id: req.params.id,
+          id: req.session.user_id,
         },
       });
 
@@ -36,6 +36,7 @@ router.get("/", async (req, res) => {
       });
 
       snodes = favSnodeData.map((snode) => snode.get({plain: true}));
+
     } else {
       snodeData = await Codesnip.findAll({
         order: [["favorited", "DESC"]],
@@ -51,12 +52,12 @@ router.get("/", async (req, res) => {
     }
 
     // Pass serialized data and session flag into template
-    // res.render("homepage", {
-    //   snodes,
-    //   logged_in: req.session.logged_in,
-    // });
+    res.render("homepage", {
+      snodes,
+      logged_in: req.session.logged_in,
+    });
 
-    res.json(snodes);
+    // res.json(snodes);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -78,12 +79,12 @@ router.get("/topsnodes", async (req, res) => {
     snodes = snodeData.map((snode) => snode.get({plain: true}));
 
     // Pass serialized data and session flag into template
-    // res.render("topsnodes", {
-    //   snodes,
-    //   logged_in: req.session.logged_in,
-    // });
+    res.render("topsnodes", {
+      snodes,
+      logged_in: req.session.logged_in,
+    });
 
-    res.json(snodes);
+    // res.json(snodes);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -105,12 +106,12 @@ router.get("/recents", async (req, res) => {
     snodes = snodeData.map((snode) => snode.get({plain: true}));
 
     // Pass serialized data and session flag into template
-    // res.render("recents", {
-    //   snodes,
-    //   logged_in: req.session.logged_in,
-    // });
+    res.render("homepage", {
+      snodes,
+      logged_in: req.session.logged_in,
+    });
 
-    res.json(snodes);
+    // res.json(snodes);
   } catch (err) {
     res.status(500).json(err);
   }
