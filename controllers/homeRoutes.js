@@ -125,7 +125,7 @@ router.get("/profile/:id", withAuth, async (req, res) => {
 });
 
 // Sends user to the page to draft up a new snode
-router.get("/draftsnode", withAuth, async (req, res) => {
+router.get("/draftsnode", async (req, res) => {
   try {
     res.render("snodeditor", {
       layout: 'draftsnode',

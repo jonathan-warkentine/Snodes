@@ -1,17 +1,34 @@
-<header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <a href="/">Tech Blog!</a>
-      </h1>
-      <nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/">homepage</a> |
-        <a href="/dashboard">dashboard</a> |
-            <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/">homepage</a> |
-        <a href="/dashboard">dashboard</a> |
-        <a href="/login">login</a>
-        {{/if}}
-      </nav>
+<header class="display-flex justify-space-between align-center p-5">
+    <h1>
+      <a href="/">Snodes</a>
+    </h1>
+    <nav>
+      <!-- Conditionally render login or logout links -->
+      {{#if logged_in}}
+      <a href="/">homepage</a> |
+      <a href="/dashboard">dashboard</a> |
+          <button class="no-button" id="logout">logout</button>
+      {{else}}
+      <a href="/">homepage</a> |
+      <a href="/myprofile">My Profile</a> |
+      <a href="/login">login</a>
+      {{/if}}
+    </nav>
 </header>
+
+<header class="container-fluid">
+  <div class="row display-flex justify-space-between align-center p-3">
+       <form id="search-form" class="col-auto">
+          <input id="searchbar" type="search" placeholder="Search Snodes...">
+          <input type="submit" value="Search">
+        </form>
+        <nav class="col-auto">  
+          <a href="/topsnodes'">Top Snodes</a> |
+          <a href="/recents">Fresh Snodes</a> |
+          <a href="/tags">Top Cateogories</a> |
+          <a href="/draftsnode">Post Your Snode!</a>
+        </nav>
+  </div>
+</header>
+
+<script src="./js/searchbar.js"></script>
