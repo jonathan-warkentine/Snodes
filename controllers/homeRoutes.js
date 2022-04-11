@@ -128,10 +128,10 @@ router.get("/tags", async (req, res) => {
     });
     tags = tagData.map((tag) => tag.get({plain: true}));
     tags.forEach((tag) => {
-      tag.tag_num = tag.codesnips.length
-    })
+      tag.tag_num = tag.codesnips.length;
+    });
 
-    tags.sort((a, b) => (a.tag_num > b.tag_num) ? -1 : 1)
+    tags.sort((a, b) => (a.tag_num > b.tag_num ? -1 : 1));
     // Pass serialized data and session flag into template
     // res.render("tags", {
     //   tags,
@@ -273,6 +273,45 @@ router.get("/draftsnode", withAuth, async (req, res) => {
   }
 });
 
+router.get("/searchresults/:search", async (req, res) => {
+  try {
+    const searchArr = req.params.search.split("&");
+
+    const searchArrObj = searchArr.reduce(function (acc, favId) {
+      return [...acc, {id: favId}];
+    }, []);
+
+    // Query: Find all Tags with ALL of the search parameters. Include the codesnips associated. Include the user associated with each codesnip.
+    codesnipData = await Tag.findAll({
+      where: {
+        [Op.and]: searchArrObj,
+      },
+      include: [
+        {
+          model: Codesnip,
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+      ],
+    });
+
+    const searchResults = codesnipData.map((snode) => snode.get({plain: true}));
+
+    // // Pass serialized data and session flag into template
+    // res.render("searchresults", {
+    //   searchResults,
+    //   logged_in: req.session.logged_in,
+    // });
+
+    res.json(searchResults);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
@@ -289,28 +328,28 @@ router.get("/login", (req, res) => {
 //
 router.get("/testing/:search", async (req, res) => {
   try {
-    
-    const searchArr = req.params.search.split('&');
-    
+    const searchArr = req.params.search.split("&");
+
     const searchArrObj = searchArr.reduce(function (acc, favId) {
       return [...acc, {id: favId}];
     }, []);
 
-    // Query: Find all Tags with any of the search parameters. Include the codesnips associated. Include the user associated with each codesnip.
+    // Query: Find all Tags with ALL of the search parameters. Include the codesnips associated. Include the user associated with each codesnip.
     codesnipData = await Tag.findAll({
       where: {
-        [Op.or]: searchArrObj,
+        [Op.and]: searchArrObj,
       },
       include: [
         {
           model: Codesnip,
-          include: [{
-            model: User,
-          }]
+          include: [
+            {
+              model: User,
+            },
+          ],
         },
       ],
     });
-
 
     const searchResults = codesnipData.map((snode) => snode.get({plain: true}));
 
