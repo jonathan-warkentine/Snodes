@@ -128,7 +128,11 @@ router.get("/tags", async (req, res) => {
       limit: 10,
     });
     tags = tagData.map((tag) => tag.get({plain: true}));
+    tags.forEach((tag) => {
+      tag.tag_num = tag.codesnips.length
+    })
 
+    tags.sort((a, b) => (a.tag_num > b.tag_num) ? -1 : 1)
     // Pass serialized data and session flag into template
     // res.render("tags", {
     //   tags,
