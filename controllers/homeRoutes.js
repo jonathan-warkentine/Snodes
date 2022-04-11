@@ -6,28 +6,40 @@ const {Op} = require("sequelize");
 // If logged in, displays the user's favorites on homepage, if not logged in, displays top snodes
 router.get("/", async (req, res) => {
   try {
-    let snodeData;
+    let snodes;
     if (req.session.logged_in) {
-      snodeData = await Favorite.findAll({
+      allData = await User.findAll({
         where: {
-          user_id: req.session.user_id,
+          id: req.params.id,
+        },
+      });
+
+      const allData2 = allData.map((user) => user.get({plain: true}));
+
+      const favString = allData2[0].favorites;
+      const favArrStrings = favString.split(",");
+      const favArr = favArrStrings.map((element) => parseInt(element));
+
+      const arrFavObj = favArr.reduce(function (acc, favId) {
+        return [...acc, {id: favId}];
+      }, []);
+
+      favSnodeData = await Codesnip.findAll({
+        where: {
+          [Op.or]: arrFavObj,
         },
         include: [
           {
             model: User,
-            attributes: ["name"],
-          },
-          {
-            model: Codesnip,
           },
         ],
       });
+
+      snodes = favSnodeData.map((snode) => snode.get({plain: true}));
     } else {
       // TODO: Build this to make the snodeData only the top favorited snodes
       snodeData = await Codesnip.findAll({
-        // attributes: [
-        //   [sequelize.literal('(SELECT COUNT(*))')]
-        // ],
+        order: [["favorited", "DESC"]],
         include: [
           {
             model: User,
@@ -35,15 +47,16 @@ router.get("/", async (req, res) => {
           },
         ],
       });
+      snodes = snodeData.map((snode) => snode.get({plain: true}));
     }
-    const snodes = snodeData.map((snode) => snode.get({plain: true}));
-    // Pass serialized data and session flag into template
-    res.render("homepage", {
-      snodes,
-      logged_in: req.session.logged_in,
-    });
 
-    // res.json(snodes);
+    // Pass serialized data and session flag into template
+    // res.render("homepage", {
+    //   snodes,
+    //   logged_in: req.session.logged_in,
+    // });
+
+    res.json(snodes);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -95,10 +108,9 @@ router.get("/favsnodes", withAuth, async (req, res) => {
 
 router.get("/profile/:id", withAuth, async (req, res) => {
   try {
-
     personalSnodeData = await Codesnip.findAll({
       where: {
-        user_id: req.params.id
+        user_id: req.params.id,
       },
       include: [
         {
@@ -107,7 +119,9 @@ router.get("/profile/:id", withAuth, async (req, res) => {
       ],
     });
 
-    const personalSnodes = personalSnodeData.map((snode) => snode.get({plain: true}));
+    const personalSnodes = personalSnodeData.map((snode) =>
+      snode.get({plain: true})
+    );
 
     // // Pass serialized data and session flag into template
     // res.render("profile", {
