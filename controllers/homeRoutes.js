@@ -8,18 +8,19 @@ router.get("/", async (req, res) => {
   try {
     let snodes;
     if (req.session.logged_in) {
+      
       allData = await User.findAll({
         where: {
-          id: req.session.user_id,
+          id: 2,
         },
       });
-
+      
       const allData2 = allData.map((user) => user.get({plain: true}));
 
       const favString = allData2[0].favorites;
       const favArrStrings = favString.split(",");
       const favArr = favArrStrings.map((element) => parseInt(element));
-
+      
       const arrFavObj = favArr.reduce(function (acc, favId) {
         return [...acc, {id: favId}];
       }, []);
@@ -49,8 +50,8 @@ router.get("/", async (req, res) => {
         limit: 10,
       });
       snodes = snodeData.map((snode) => snode.get({plain: true}));
-    }
-
+     }
+    console.log(snodes);
     // Pass serialized data and session flag into template
     res.render("homepage", {
       snodes,
@@ -275,18 +276,20 @@ router.get("/draftsnode", async (req, res) => {
   }
 });
 
-router.get("/searchresults/:search", async (req, res) => {
+router.get("/search", async (req, res) => {
   try {
-    const searchArr = req.params.search.split("&");
+    console.log(req.query.q);
+    const searchArr = req.query.q.split(" ");
 
-    const searchArrObj = searchArr.reduce(function (acc, favId) {
-      return [...acc, {id: favId}];
+    const searchArrObj = searchArr.reduce(function (acc, tag) {
+      return [...acc, {tag_name: tag}];
     }, []);
 
+    console.log(searchArrObj);
     // Query: Find all Tags with ALL of the search parameters. Include the codesnips associated. Include the user associated with each codesnip.
-    codesnipData = await Tag.findAll({
+    tagData = await Tag.findAll({
       where: {
-        [Op.and]: searchArrObj,
+        [Op.or]: searchArrObj,
       },
       include: [
         {
@@ -300,15 +303,17 @@ router.get("/searchresults/:search", async (req, res) => {
       ],
     });
 
-    const searchResults = codesnipData.map((snode) => snode.get({plain: true}));
+    const tagResults = tagData.map((snode) => snode.get({plain: true}));
+    const codesnips = tagResults.map(tag => tag.codesnips).flat();
 
     // // Pass serialized data and session flag into template
-    // res.render("searchresults", {
-    //   searchResults,
-    //   logged_in: req.session.logged_in,
-    // });
+    res.render("search", {
+      codesnips,
+      logged_in: req.session.logged_in,
+    });
 
-    res.json(searchResults);
+
+    res.json(codesnips);
   } catch (err) {
     res.status(500).json(err);
   }
