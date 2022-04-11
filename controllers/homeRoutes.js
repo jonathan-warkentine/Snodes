@@ -37,7 +37,6 @@ router.get("/", async (req, res) => {
 
       snodes = favSnodeData.map((snode) => snode.get({plain: true}));
     } else {
-      // TODO: Build this to make the snodeData only the top favorited snodes
       snodeData = await Codesnip.findAll({
         order: [["favorited", "DESC"]],
         include: [
@@ -52,6 +51,32 @@ router.get("/", async (req, res) => {
 
     // Pass serialized data and session flag into template
     // res.render("homepage", {
+    //   snodes,
+    //   logged_in: req.session.logged_in,
+    // });
+
+    res.json(snodes);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Return the top Snodes sorted with most favorited on top
+router.get("/topsnodes", async (req, res) => {
+  try {
+    snodeData = await Codesnip.findAll({
+      order: [["favorited", "DESC"]],
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+    });
+    snodes = snodeData.map((snode) => snode.get({plain: true}));
+
+    // Pass serialized data and session flag into template
+    // res.render("topsnodes", {
     //   snodes,
     //   logged_in: req.session.logged_in,
     // });
