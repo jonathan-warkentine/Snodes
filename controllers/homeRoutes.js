@@ -45,6 +45,7 @@ router.get("/", async (req, res) => {
             attributes: ["name"],
           },
         ],
+        limit: 10,
       });
       snodes = snodeData.map((snode) => snode.get({plain: true}));
     }
@@ -72,6 +73,7 @@ router.get("/topsnodes", async (req, res) => {
           attributes: ["name"],
         },
       ],
+      limit: 10,
     });
     snodes = snodeData.map((snode) => snode.get({plain: true}));
 
@@ -82,6 +84,58 @@ router.get("/topsnodes", async (req, res) => {
     // });
 
     res.json(snodes);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Return the most recently posted Snodes
+router.get("/recents", async (req, res) => {
+  try {
+    snodeData = await Codesnip.findAll({
+      order: [["date", "DESC"]],
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+      ],
+      limit: 10,
+    });
+    snodes = snodeData.map((snode) => snode.get({plain: true}));
+
+    // Pass serialized data and session flag into template
+    // res.render("recents", {
+    //   snodes,
+    //   logged_in: req.session.logged_in,
+    // });
+
+    res.json(snodes);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Return the most commonly used tags
+router.get("/tags", async (req, res) => {
+  try {
+    tagData = await Tag.findAll({
+      include: [
+        {
+          model: Codesnip,
+        },
+      ],
+      limit: 10,
+    });
+    tags = tagData.map((tag) => tag.get({plain: true}));
+
+    // Pass serialized data and session flag into template
+    // res.render("tags", {
+    //   tags,
+    //   logged_in: req.session.logged_in,
+    // });
+
+    res.json(tags);
   } catch (err) {
     res.status(500).json(err);
   }
