@@ -3,18 +3,21 @@
       "user_id": "1",
       "description": "My favorite tech",
       "content": "id: {\ntype: DataTypes.INTEGER,\nallowNull: false,\nprimaryKey: true,\nautoIncrement: true,\n},",
-      "date": "June 12, 2000 17:00:00"
+      "date": "June 12, 2000 17:00:00",
+      "favorited": "3"
     },
     {
         "user_id": "2",
         "description": "Try statement",
         "content": "try {\nconst userData = await User.create(req.body);\nreq.session.save(() => {\nreq.session.user_id = userData.id;\nreq.session.logged_in = true;\nres.status(200).json(userData);\n});",
-        "date": "December 25, 2002 12:00:00"
+        "date": "December 25, 2002 12:00:00",
+        "favorited": "1"
     },
     {
         "user_id": "3",
         "description": "Google",
         "content": "// in file 'Code/User/snippets/javascript.json'\n{\n\"For Loop\": {\"prefix\": [\"for\", \"for-const\"],\n\"body\": [\"for (const ${2:element} of ${1:array}) {\", \"\t$0\", \"}\"],\n\"description\": \"A for loop.\"\n}\n}",
-        "date": "September 8, 2008 10:00:00"
+        "date": "September 8, 2008 10:00:00",
+        "favorited": "2"
     }
   ]

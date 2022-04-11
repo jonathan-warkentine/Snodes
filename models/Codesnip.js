@@ -26,7 +26,11 @@ Codesnip.init ({
       type: DataTypes.DATE,
       allowNull: false,
     },
-  
+    favorited: {
+      type: DataTypes.INTEGER,
+      defaultVALUE: "0",
+      allowNull: false,
+    },
     user_id: {
         type:DataTypes.INTEGER,
         allowNull:false,

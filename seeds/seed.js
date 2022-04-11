@@ -1,10 +1,9 @@
 const sequelize = require("../config/connection");
-const {User, Tag, Codesnip, Favorite, Codesniptag} = require("../models");
+const {User, Tag, Codesnip, Codesniptag} = require("../models");
 
 const userData = require("./userData.json");
 const codesnipData = require("./codesnipData.json");
 const tagData = require("./tagData.json");
-const favoriteData = require("./favoriteData.json");
 const codesniptagData = require("./codesniptagData.json");
 
 const seedDatabase = async () => {
@@ -21,11 +20,6 @@ const seedDatabase = async () => {
   });
 
   const tags = await Tag.bulkCreate(tagData, {
-    individualHooks: true,
-    returning: true,
-  });
-
-  const favorites = await Favorite.bulkCreate(favoriteData, {
     individualHooks: true,
     returning: true,
   });
