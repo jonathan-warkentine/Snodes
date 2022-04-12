@@ -313,7 +313,7 @@ router.get("/search", async (req, res) => {
     });
 
 
-    res.json(codesnips);
+    // res.json(codesnips);
   } catch (err) {
     res.status(500).json(err);
   }
