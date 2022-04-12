@@ -1,6 +1,6 @@
 {
-  "name": "tech-blog",
-  "version": "1.0.0",
+  "name": "Snodes",
+  "version": "1.1.1",
   "description": "",
   "main": "server.js",
   "scripts": {
