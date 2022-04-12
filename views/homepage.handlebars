@@ -5,7 +5,7 @@
     <h2>
       <a href="/blogpost/{{snode.id}}">{{snode.description}}</a>
     </h2>
-    <p>Written by {{snode.user.name}} on {{format_date snode.date}}</p>
+    <p>Written by <a href="/profile/{{snode.user.id}}">{{snode.user.name}}</a> on {{format_date snode.date}}</p>
   </div>
   <div class="col-md-7">
     <p>
