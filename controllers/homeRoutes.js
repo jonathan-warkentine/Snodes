@@ -3,40 +3,23 @@ const {User, Codesnip, Tag, Codesniptag} = require("../models");
 const withAuth = require("../utils/auth");
 const {Op} = require("sequelize");
 
-// If logged in, displays the user's favorites on homepage, if not logged in, displays top snodes
+// If logged in, displays the recent snodes on homepage, if not logged in, displays top snodes
 router.get("/", async (req, res) => {
   try {
     let snodes;
     if (req.session.logged_in) {
-      
-      allData = await User.findAll({
-        where: {
-          id: 2,
-        },
-      });
-      
-      const allData2 = allData.map((user) => user.get({plain: true}));
-
-      const favString = allData2[0].favorites;
-      const favArrStrings = favString.split(",");
-      const favArr = favArrStrings.map((element) => parseInt(element));
-      
-      const arrFavObj = favArr.reduce(function (acc, favId) {
-        return [...acc, {id: favId}];
-      }, []);
-
-      favSnodeData = await Codesnip.findAll({
-        where: {
-          [Op.or]: arrFavObj,
-        },
+      recentSnodeData = await Codesnip.findAll({
+        order: [["date", "DESC"]],
         include: [
           {
             model: User,
+            attributes: ["name"],
           },
         ],
+        limit: 10,
       });
 
-      snodes = favSnodeData.map((snode) => snode.get({plain: true}));
+      snodes = recentSnodeData.map((snode) => snode.get({plain: true}));
 
     } else {
       snodeData = await Codesnip.findAll({
@@ -55,6 +38,7 @@ router.get("/", async (req, res) => {
     // Pass serialized data and session flag into template
     res.render("homepage", {
       snodes,
+      user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
 
@@ -83,6 +67,7 @@ console.log(snodes);
     // Pass serialized data and session flag into template
     res.render("homepage", {
       snodes,
+      user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
 
@@ -110,6 +95,7 @@ router.get("/recents", async (req, res) => {
     // Pass serialized data and session flag into template
     res.render("homepage", {
       snodes,
+      user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
 
@@ -138,6 +124,7 @@ router.get("/tags", async (req, res) => {
     // Pass serialized data and session flag into template
     res.render("categories", {
       tags,
+      user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
 
@@ -182,6 +169,7 @@ router.get("/favsnodes", withAuth, async (req, res) => {
     // // Pass serialized data and session flag into template
     // res.render("favsnodes", {
     //   favSnodes,
+    // user_id: req.session.user_id,
     //   logged_in: req.session.logged_in,
     // });
 
@@ -197,24 +185,25 @@ router.get("/profile/:id", withAuth, async (req, res) => {
       where: {
         user_id: req.params.id,
       },
-      include: [
-        {
-          model: User,
-        },
-      ],
     });
 
     const personalSnodes = personalSnodeData.map((snode) =>
       snode.get({plain: true})
     );
 
-    // // Pass serialized data and session flag into template
-    // res.render("profile", {
-    //   personalSnodes,
-    //   logged_in: req.session.logged_in,
-    // });
+    userData = await User.findByPk(req.params.id);
 
-    res.json(personalSnodes);
+    const user = userData.get({plain: true});
+
+    // // Pass serialized data and session flag into template
+    res.render("profile", {
+      personalSnodes,
+      user,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
+
+    // res.json(personalSnodes);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -255,6 +244,7 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
     // // Pass serialized data and session flag into template
     // res.render("profile", {
     //   favSnodes,
+    // user_id: req.session.user_id,
     //   logged_in: req.session.logged_in,
     // });
 
@@ -269,6 +259,7 @@ router.get("/draftsnode", async (req, res) => {
   try {
     res.render("snodeditor", {
       layout: 'draftsnode',
+      user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
     // res.json(blogpost);
@@ -310,6 +301,7 @@ router.get("/search", async (req, res) => {
     // // Pass serialized data and session flag into template
     res.render("search", {
       codesnips,
+      user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
 
@@ -364,6 +356,7 @@ router.get("/testing/:search", async (req, res) => {
     // // Pass serialized data and session flag into template
     // res.render("searchresults", {
     //   searchResults,
+    //   user_id: req.session.user_id,
     //   logged_in: req.session.logged_in,
     // });
 
