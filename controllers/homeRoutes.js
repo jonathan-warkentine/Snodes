@@ -306,7 +306,9 @@ router.get("/search", async (req, res) => {
     const tagResults = tagData.map((snode) => snode.get({plain: true}));
     const codesnips = tagResults.map(tag => tag.codesnips).flat();
 
-    // // Pass serialized data and session flag into template
+
+    
+    // Pass serialized data and session flag into template
     res.render("search", {
       codesnips,
       logged_in: req.session.logged_in,
