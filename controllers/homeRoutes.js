@@ -136,12 +136,12 @@ router.get("/tags", async (req, res) => {
 
     tags.sort((a, b) => (a.tag_num > b.tag_num ? -1 : 1));
     // Pass serialized data and session flag into template
-    // res.render("tags", {
-    //   tags,
-    //   logged_in: req.session.logged_in,
-    // });
+    res.render("categories", {
+      tags,
+      logged_in: req.session.logged_in,
+    });
 
-    res.json(tags);
+    // res.json(tags);
   } catch (err) {
     res.status(500).json(err);
   }
