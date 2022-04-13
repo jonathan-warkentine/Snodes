@@ -1,4 +1,4 @@
-<header class="display-flex justify-space-between align-center p-5">
+<header class="container-fluid d-flex justify-content-between p-4">
     <h1>
       <a href="/">Snodes</a>
     </h1>
@@ -14,12 +14,13 @@
 </header>
 
 <header class="container-fluid">
-  <div class="row p-3">
-       <form id="search-form" class="col-auto display-flex align-center">
-          <input id="searchbar" type="search" placeholder="Search Snodes...">
-          <input type="submit" value="Search">
+  <div class="row p-3 d-flex justify-content-center">
+       <form id="search-form" class="col-auto d-flex flex-nowrap">
+          <input id="searchbar" type="search" placeholder="Search Snodes..." class="rounded">
+          <input type="submit" value="Search" class="ml-1 rounded">
         </form>
-        <nav class="col-auto display-flex justify-space-around align-center">  
+        <div class="col-1"></div>
+        <nav class="col-auto">  
           <a href="/topsnodes">Top Snodes</a> |
           <a href="/recents">Fresh Snodes</a> |
           <a href="/tags">Top Cateogories</a> |
@@ -28,4 +29,4 @@
   </div>
 </header>
 
-<script src="./js/searchbar.js"></script>
+<script src="/js/searchbar.js"></script>

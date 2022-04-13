@@ -1,0 +1,3 @@
+clickcopy(button){
+    //
+}

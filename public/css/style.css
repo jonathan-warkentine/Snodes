@@ -1,4 +1,4 @@
-header, .blogpost:not(:last-child) {
+header, .post:not(:last-child) {
   border-bottom: 2px solid rgb(17, 9, 9);
 }
 
@@ -16,18 +16,7 @@ header {
   justify-content: space-between;
 }
 
-.comments-section {
-  background-color: #b9b3b3;
-  margin: 20px;
-  padding: 10px;
-}
-
-.comment {
-  background-color: #b9b3b3;
-  margin: 20px;
-}
-
-.blogpost {
+.post {
   margin: 20px;
 }
 
@@ -44,4 +33,13 @@ header {
 .no-button:hover {
   color: #bc961b;
   text-decoration: underline;
+}
+
+/* FA Icons */
+.fa{
+  font-size:30px;color:red;
+}
+
+.fa:hover{
+  cursor: pointer;
 }

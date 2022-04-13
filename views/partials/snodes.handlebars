@@ -1,0 +1,16 @@
+<!-- Loop over each object in the snodes array -->
+{{#each snodes as |snode|}}
+<div class="row mb-5 pb-1 post">
+  <div class="col-md-4">
+    <h2>{{snode.description}}</a></h2>
+    <p>Published by <a href="/profile/{{snode.user_id}}">{{snode.user.name}}</a> on {{format_date snode.date}}</p>
+    <i onclick="favorite(this)" class="fa fa-heart fa-heart-o"></i>
+  </div>
+  <div class="col-md-7 p-2">
+    <pre>{{snode.content}}</pre>
+    <button id="{{snode.id}}">📋 Click to Copy</button>
+  </div>
+</div>
+{{/each}}
+
+<script src="/js/favoritebutton.js"></script>
