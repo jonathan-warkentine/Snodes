@@ -13,4 +13,21 @@ module.exports = {
     console.log(arg2);
     return arg1 === arg2;
   },
+
+  if_contains: (val, string) => {
+    if (!string){
+      return 'false';
+    }
+    arr = string.split(',').map(Number);
+    
+    if (arr.includes(val)){
+      return 'true';
+    }
+
+    return 'false';
+  },
+
+  extract_tagNames: (tags) => {
+    return tags.map(tag => ` ${tag.tag_name}`);
+  }
 };

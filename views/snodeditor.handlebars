@@ -1,7 +1,14 @@
-<h2 class="text-center p-3">Draft Your Snode Below!</h2>
-
-<textarea id="codearea" name="codearea" cols="30" rows="10"></textarea>
-<br>
-<input id="snodeSubmit" type="submit">
-
-<script src="./js/codemirrorApp.js"></script>
+<div id="draft" class="container-fluid border pl-5 pr-5 pt-3">
+    <h2 class="text-center">Draft Your Snode Below!</h2>
+    <form id="inputs" class="container p-2">
+        <input type="text" name="description" id="description" placeholder="Title" class="row mb-4">
+        <div class="border">
+            <textarea id="codearea" name="codearea" cols="30" rows="10" class="row border"></textarea>
+        </div>
+        <input type="text" name="tags" id="tags" placeholder="Add Tags" class="row mt-4">
+        <div class="row mt-2 d-flex justify-content-center">
+            <input id="snodeSubmit" type="submit">
+        </div>
+    </form>
+    <script src="./js/codemirrorApp.js"></script>
+</div>
