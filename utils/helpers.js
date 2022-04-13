@@ -28,6 +28,9 @@ module.exports = {
   },
 
   extract_tagNames: (tags) => {
+    if (!tags){
+      return "";
+    }
     return tags.map(tag => ` ${tag.tag_name}`);
   }
 };
