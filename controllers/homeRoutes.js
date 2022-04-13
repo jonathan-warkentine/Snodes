@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
         ],
         limit: 10,
       });
-      userData = await User.findByPk(req.params.id);
+      userData = await User.findByPk(req.session.user_id);
 
       user = userData.get({plain: true});
 
@@ -38,6 +38,7 @@ router.get("/", async (req, res) => {
       snodes = snodeData.map((snode) => snode.get({plain: true}));
     }
     console.log(snodes);
+    console.log(user);
     // Pass serialized data and session flag into template
     res.render("homepage", {
       snodes,

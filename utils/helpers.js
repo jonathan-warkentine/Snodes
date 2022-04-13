@@ -15,10 +15,11 @@ module.exports = {
   },
 
   if_contains: (val, arr) => {
-    arr = [arr].flat();
-    if (!arr){
-      return false;
-    }
-    return arr.includes(val);
+  console.log('val: ', val, ' arr: ', arr);
+    //   arr = [arr].flat();
+  //   if (!arr){
+  //     return false;
+  //   }
+  //   return arr.includes(val);
   }
 };
