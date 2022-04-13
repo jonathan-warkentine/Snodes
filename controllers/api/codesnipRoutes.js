@@ -4,7 +4,7 @@ const {Op} = require("sequelize");
 const withAuth = require("../../utils/auth.js");
 
 // create new Codesnip
-router.post("/", authAuth, async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
   /* req.body should look like this...
       {
         description: "string",

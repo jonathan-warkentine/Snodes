@@ -225,7 +225,7 @@ router.get("/profile/:id", withAuth, async (req, res) => {
     profileUserData = await User.findByPk(req.params.id);
 
     const profileUser = profileUserData.get({plain: true});
-
+    console.log(snodes)
     // // Pass serialized data and session flag into template
     res.render("profile", {
       snodes,
@@ -280,7 +280,7 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
     profileUserData = await User.findByPk(req.params.id);
 
     const profileUser = profileUserData.get({plain: true});
-
+    console.log(snodes)
     // // Pass serialized data and session flag into template
     res.render("profile", {
       snodes,
@@ -303,7 +303,7 @@ router.get("/draftsnode", withAuth, async (req, res) => {
     userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
-
+    
     res.render("snodeditor", {
       layout: "draftsnode",
       user,

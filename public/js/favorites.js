@@ -16,6 +16,15 @@ function favorite(element) {
     fetch(`/api/users/favorite/${element.getAttribute('snodeid')}`, {
       method: 'PUT'
     });
-    element.setAttribute('isFav', !JSON.parse(element.getAttribute('isFav').toLowerCase())); //toggle isFav value
+
+    if (JSON.parse(element.getAttribute('isFav'))){
+      element.nextElementSibling.textContent = Number(element.nextElementSibling.textContent)-1; // increment fav coutner
+      element.setAttribute('isFav', 'false');
+    }
+    else {
+      element.nextElementSibling.textContent = Number(element.nextElementSibling.textContent)+1; // increment fav coutner
+      element.setAttribute('isFav', 'true');
+    }
+
     favStatus(element);
   }
