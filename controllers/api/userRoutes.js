@@ -20,7 +20,7 @@ router.put("/favorite/:id", async (req, res) => {
   try {
     const codesnipId = req.params.id;
     // Change back to req.session.user_id
-    const userData = await User.findByPk(2);
+    const userData = await User.findByPk(4);
     const user = userData.get({plain: true});
     console.log(user);
 
@@ -86,7 +86,7 @@ router.put("/favorite/:id", async (req, res) => {
         {
           where: {
             // Change back to req.session.user_id
-            id: 2,
+            id: 4,
           },
         }
       );

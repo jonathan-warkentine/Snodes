@@ -164,14 +164,14 @@ router.get("/favsnodes", withAuth, async (req, res) => {
       ],
     });
 
-    const favSnodes = favSnodeData.map((snode) => snode.get({plain: true}));
+    const snodes = favSnodeData.map((snode) => snode.get({plain: true}));
 
     // // Pass serialized data and session flag into template
-    // res.render("favsnodes", {
-    //   favSnodes,
-    // user_id: req.session.user_id,
-    //   logged_in: req.session.logged_in,
-    // });
+    res.render("homepage", {
+      snodes,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
 
     res.json(favSnodes);
   } catch (err) {
@@ -239,16 +239,16 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
       ],
     });
 
-    const favSnodes = favSnodeData.map((snode) => snode.get({plain: true}));
+    const snodes = favSnodeData.map((snode) => snode.get({plain: true}));
 
     // // Pass serialized data and session flag into template
-    // res.render("profile", {
-    //   favSnodes,
-    // user_id: req.session.user_id,
-    //   logged_in: req.session.logged_in,
-    // });
+    res.render("profile", {
+      snodes,
+    user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
 
-    res.json(favSnodes);
+    // res.json(favSnodes);
   } catch (err) {
     res.status(500).json(err);
   }
