@@ -7,6 +7,7 @@ const {Op} = require("sequelize");
 router.get("/", async (req, res) => {
   try {
     let snodes;
+    let user;
     if (req.session.logged_in) {
       recentSnodeData = await Codesnip.findAll({
         order: [["date", "DESC"]],
@@ -18,6 +19,9 @@ router.get("/", async (req, res) => {
         ],
         limit: 10,
       });
+      userData = await User.findByPk(req.params.id);
+
+      user = userData.get({plain: true});
 
       snodes = recentSnodeData.map((snode) => snode.get({plain: true}));
     } else {
@@ -37,6 +41,7 @@ router.get("/", async (req, res) => {
     // Pass serialized data and session flag into template
     res.render("homepage", {
       snodes,
+      user,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
@@ -62,10 +67,15 @@ router.get("/topsnodes", async (req, res) => {
     });
 
     snodes = snodeData.map((snode) => snode.get({plain: true}));
-    console.log(snodes);
+    
+    userData = await User.findByPk(req.params.id);
+
+    const user = userData.get({plain: true});
+
     // Pass serialized data and session flag into template
     res.render("homepage", {
       snodes,
+      user,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
@@ -91,9 +101,14 @@ router.get("/recents", async (req, res) => {
     });
     snodes = snodeData.map((snode) => snode.get({plain: true}));
 
+    userData = await User.findByPk(req.params.id);
+
+    const user = userData.get({plain: true});
+
     // Pass serialized data and session flag into template
     res.render("homepage", {
       snodes,
+      user,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
@@ -120,9 +135,15 @@ router.get("/tags", async (req, res) => {
     });
 
     tags.sort((a, b) => (a.tag_num > b.tag_num ? -1 : 1));
+
+    userData = await User.findByPk(req.params.id);
+
+    const user = userData.get({plain: true});
+
     // Pass serialized data and session flag into template
     res.render("categories", {
       tags,
+      user,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
@@ -165,9 +186,15 @@ router.get("/favsnodes", withAuth, async (req, res) => {
 
     const snodes = favSnodeData.map((snode) => snode.get({plain: true}));
 
+    userData = await User.findByPk(req.params.id);
+
+    const user = userData.get({plain: true});
+
+
     // // Pass serialized data and session flag into template
     res.render("homepage", {
       snodes,
+      user,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
@@ -240,9 +267,14 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
 
     const snodes = favSnodeData.map((snode) => snode.get({plain: true}));
 
+    userData = await User.findByPk(req.params.id);
+
+    const user = userData.get({plain: true});
+
     // // Pass serialized data and session flag into template
     res.render("profile", {
       snodes,
+      user,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
@@ -256,8 +288,14 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
 // Sends user to the page to draft up a new snode
 router.get("/draftsnode", async (req, res) => {
   try {
+
+    userData = await User.findByPk(req.params.id);
+
+    const user = userData.get({plain: true});
+
     res.render("snodeditor", {
       layout: "draftsnode",
+      user,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
@@ -297,9 +335,14 @@ router.get("/search", async (req, res) => {
     const tagResults = tagData.map((snode) => snode.get({plain: true}));
     const snodes = tagResults.map((tag) => tag.codesnips).flat();
 
+    userData = await User.findByPk(req.params.id);
+
+    const user = userData.get({plain: true});
+
     // // Pass serialized data and session flag into template
     res.render("search", {
       snodes,
+      user,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
