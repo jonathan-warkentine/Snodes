@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const {User, Codesnip} = require("../../models");
+const withAuth = require("../../utils/auth.js");
 
 router.post("/", async (req, res) => {
   try {
@@ -16,7 +17,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/favorite/:id", async (req, res) => {
+router.put("/favorite/:id", withAuth, async (req, res) => {
   try {
     const codesnipId = req.params.id;
     // Change back to req.session.user_id
