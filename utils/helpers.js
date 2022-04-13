@@ -13,4 +13,12 @@ module.exports = {
     console.log(arg2);
     return arg1 === arg2;
   },
+
+  if_contains: (val, arr) => {
+    arr = [arr].flat();
+    if (!arr){
+      return false;
+    }
+    return arr.includes(val);
+  }
 };
