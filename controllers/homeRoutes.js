@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
         ],
         limit: 10,
       });
-      userData = await User.findByPk(req.params.id);
+      userData = await User.findByPk(req.session.user_id);
 
       user = userData.get({plain: true});
 
@@ -68,7 +68,7 @@ router.get("/topsnodes", async (req, res) => {
 
     snodes = snodeData.map((snode) => snode.get({plain: true}));
     
-    userData = await User.findByPk(req.params.id);
+    userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
 
@@ -101,7 +101,7 @@ router.get("/recents", async (req, res) => {
     });
     snodes = snodeData.map((snode) => snode.get({plain: true}));
 
-    userData = await User.findByPk(req.params.id);
+    userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
 
@@ -136,7 +136,7 @@ router.get("/tags", async (req, res) => {
 
     tags.sort((a, b) => (a.tag_num > b.tag_num ? -1 : 1));
 
-    userData = await User.findByPk(req.params.id);
+    userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
 
@@ -186,7 +186,7 @@ router.get("/favsnodes", withAuth, async (req, res) => {
 
     const snodes = favSnodeData.map((snode) => snode.get({plain: true}));
 
-    userData = await User.findByPk(req.params.id);
+    userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
 
@@ -217,14 +217,19 @@ router.get("/profile/:id", withAuth, async (req, res) => {
       snode.get({plain: true})
     );
 
-    userData = await User.findByPk(req.params.id);
+    userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
+
+    profileUserData = await User.findByPk(req.params.id);
+
+    const profileUser = profileUserData.get({plain: true});
 
     // // Pass serialized data and session flag into template
     res.render("profile", {
       personalSnodes,
       user,
+      profileUser,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
@@ -267,14 +272,19 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
 
     const snodes = favSnodeData.map((snode) => snode.get({plain: true}));
 
-    userData = await User.findByPk(req.params.id);
+    userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
+
+    profileUserData = await User.findByPk(req.params.id);
+
+    const profileUser = profileUserData.get({plain: true});
 
     // // Pass serialized data and session flag into template
     res.render("profile", {
       snodes,
       user,
+      profileUser,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
@@ -289,7 +299,7 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
 router.get("/draftsnode", async (req, res) => {
   try {
 
-    userData = await User.findByPk(req.params.id);
+    userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
 
@@ -335,7 +345,7 @@ router.get("/search", async (req, res) => {
     const tagResults = tagData.map((snode) => snode.get({plain: true}));
     const snodes = tagResults.map((tag) => tag.codesnips).flat();
 
-    userData = await User.findByPk(req.params.id);
+    userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
 
