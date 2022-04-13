@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const {Codesnip, Codesniptag, Tag} = require("../../models");
 const {Op} = require("sequelize");
+const withAuth = require("../../utils/auth.js");
 
 // create new Codesnip
-router.post("/", async (req, res) => {
+router.post("/", authAuth, async (req, res) => {
   /* req.body should look like this...
       {
         description: "string",

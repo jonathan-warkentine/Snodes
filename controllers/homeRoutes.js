@@ -53,7 +53,7 @@ router.get("/", async (req, res) => {
 });
 
 // Return the top Snodes sorted with most favorited on top
-router.get("/topsnodes", async (req, res) => {
+router.get("/topsnodes", withAuth, async (req, res) => {
   try {
     snodeData = await Codesnip.findAll({
       order: [["favorited", "DESC"]],
@@ -87,7 +87,7 @@ router.get("/topsnodes", async (req, res) => {
 });
 
 // Return the most recently posted Snodes
-router.get("/recents", async (req, res) => {
+router.get("/recents", withAuth, async (req, res) => {
   try {
     snodeData = await Codesnip.findAll({
       order: [["date", "DESC"]],
@@ -120,7 +120,7 @@ router.get("/recents", async (req, res) => {
 });
 
 // Return the most commonly used tags
-router.get("/tags", async (req, res) => {
+router.get("/tags", withAuth, async (req, res) => {
   try {
     tagData = await Tag.findAll({
       include: [
@@ -296,7 +296,7 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
 });
 
 // Sends user to the page to draft up a new snode
-router.get("/draftsnode", async (req, res) => {
+router.get("/draftsnode", withAuth, async (req, res) => {
   try {
 
     userData = await User.findByPk(req.session.user_id);
@@ -315,7 +315,7 @@ router.get("/draftsnode", async (req, res) => {
   }
 });
 
-router.get("/search", async (req, res) => {
+router.get("/search", withAuth, async (req, res) => {
   try {
     console.log(req.query.q);
     const searchArr = req.query.q.split(" ");
