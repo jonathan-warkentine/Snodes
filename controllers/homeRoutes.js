@@ -296,13 +296,13 @@ router.get("/search", async (req, res) => {
     });
 
     const tagResults = tagData.map((snode) => snode.get({plain: true}));
-    const codesnips = tagResults.map(tag => tag.codesnips).flat();
+    const snodes = tagResults.map(tag => tag.codesnips).flat();
 
 
     
     // Pass serialized data and session flag into template
     res.render("search", {
-      codesnips,
+      snodes,
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
