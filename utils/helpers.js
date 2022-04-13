@@ -14,12 +14,16 @@ module.exports = {
     return arg1 === arg2;
   },
 
-  if_contains: (val, arr) => {
-  console.log('val: ', val, ' arr: ', arr);
-    //   arr = [arr].flat();
-  //   if (!arr){
-  //     return false;
-  //   }
-  //   return arr.includes(val);
+  if_contains: (val, string) => {
+    if (!string){
+      return 'false';
+    }
+    arr = string.split(',').map(Number);
+    
+    if (arr.includes(val)){
+      return 'true';
+    }
+
+    return 'false';
   }
 };

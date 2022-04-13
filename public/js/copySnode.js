@@ -1,4 +1,5 @@
-document.addEventListener('click', clickcopy);
 
-function clickcopy(event){
+function clickcopy(div){
+    navigator.clipboard.writeText(div.querySelector("pre").textContent);
+    div.querySelector('button').textContent = '📋 Copied!'
 }
