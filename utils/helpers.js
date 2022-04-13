@@ -25,5 +25,9 @@ module.exports = {
     }
 
     return 'false';
+  },
+
+  extract_tagNames: (tags) => {
+    return tags.map(tag => ` ${tag.tag_name}`);
   }
 };

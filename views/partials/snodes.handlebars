@@ -1,6 +1,6 @@
 <!-- Loop over each object in the snodes array -->
 {{#each snodes as |snode|}}
-<div class="row mb-5 pb-3 post">
+<div class="row mb-5 pb-3 post bg-light">
   <div class="col-md-4">
     <h2>{{snode.description}}</a></h2>
     <p>Published by <a href="/profile/{{snode.user_id}}">{{snode.user.name}}</a> on {{format_date snode.date}}</p>
@@ -10,8 +10,9 @@
     </div>
   </div>
   <div class="col-md-7 p-2 content" snodeid="{{snode.id}}" onclick="clickcopy(this)">
-    <pre class="border p-2 rounded">{{snode.content}}</pre>
+    <pre class="border p-2 rounded bg-white">{{snode.content}}</pre>
     <button>📋 Click Anywhere to Copy</button>
+    <p class="mt-4">Tags: {{extract_tagNames snode.tags}}</p>
   </div>
 </div>
 {{/each}}

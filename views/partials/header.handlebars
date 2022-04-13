@@ -8,12 +8,12 @@
         <a href="/profile/{{user_id}}" class="text-light">my profile</a> |
             <button class="no-button" id="logout">logout</button>
         {{else}}
-        <a href="/login">login</a>
+        <a class="text-light" href="/login">[ login ]</a>
         {{/if}}
       </nav>
   </header>
 
-<header class="container-fluid rounded-bottom bg-secondary sticky-top">
+<header class="container-fluid rounded-bottom bg-secondary sticky-top border-top">
   <div class="row p-3 d-flex justify-content-between ">
       <form id="search-form" class="col-auto d-flex flex-nowrap">
         <input id="searchbar" type="search" placeholder="Search Snodes..." class="rounded">
