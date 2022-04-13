@@ -211,6 +211,11 @@ router.get("/profile/:id", withAuth, async (req, res) => {
       where: {
         user_id: req.params.id,
       },
+      include: [
+        {
+          model: User,
+        },
+      ],
     });
 
     const personalSnodes = personalSnodeData.map((snode) =>
