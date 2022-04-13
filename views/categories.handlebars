@@ -2,14 +2,9 @@
 <div class="row mb-4 blogpost">
   <div class="col-md-5">
     <h2>
-      <a href="/tag/{{snode.id}}">{{snode.description}}</a>
+      {{tag.tag_name}}
     </h2>
-    <p>Written by {{snode.user.name}} on {{format_date snode.date}}</p>
-  </div>
-  <div class="col-md-7">
-    <p>
-      {{snode.content}}
-    </p>
+    
   </div>
 </div>
 {{/each}}
