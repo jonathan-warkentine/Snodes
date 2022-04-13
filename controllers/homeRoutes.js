@@ -32,6 +32,9 @@ router.get("/", async (req, res) => {
             model: User,
             attributes: ["name"],
           },
+          {
+            model: Tag,
+          },
         ],
         limit: 10,
       });
@@ -62,12 +65,15 @@ router.get("/topsnodes", withAuth, async (req, res) => {
           model: User,
           attributes: ["name"],
         },
+        {
+          model: Tag,
+        },
       ],
       limit: 10,
     });
 
     snodes = snodeData.map((snode) => snode.get({plain: true}));
-    
+
     userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
@@ -95,6 +101,9 @@ router.get("/recents", withAuth, async (req, res) => {
         {
           model: User,
           attributes: ["name"],
+        },
+        {
+          model: Tag,
         },
       ],
       limit: 10,
@@ -181,6 +190,9 @@ router.get("/favsnodes", withAuth, async (req, res) => {
         {
           model: User,
         },
+        {
+          model: Tag,
+        },
       ],
     });
 
@@ -189,7 +201,6 @@ router.get("/favsnodes", withAuth, async (req, res) => {
     userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
-
 
     // // Pass serialized data and session flag into template
     res.render("homepage", {
@@ -214,6 +225,9 @@ router.get("/profile/:id", withAuth, async (req, res) => {
       include: [
         {
           model: User,
+        },
+        {
+          model: Tag,
         },
       ],
     });
@@ -272,6 +286,9 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
         {
           model: User,
         },
+        {
+          model: Tag,
+        },
       ],
     });
 
@@ -303,7 +320,6 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
 // Sends user to the page to draft up a new snode
 router.get("/draftsnode", withAuth, async (req, res) => {
   try {
-
     userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
@@ -341,6 +357,9 @@ router.get("/search", withAuth, async (req, res) => {
           include: [
             {
               model: User,
+            },
+            {
+              model: Tag,
             },
           ],
         },
