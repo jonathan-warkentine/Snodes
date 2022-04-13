@@ -4,7 +4,7 @@
   <div class="col-md-4">
     <h2>{{snode.description}}</a></h2>
     <p>Published by <a href="/profile/{{snode.user_id}}">{{snode.user.name}}</a> on {{format_date snode.date}}</p>
-    <i snodeid="{{snode.id}}" isFav="{{if_contains snode.id ../user.favorites}}" onclick="favorite(this)" class="fa fa-heart fa-heart-o"></i>
+    <i snodeid="{{snode.id}}" isFav="{{if_contains snode.id ../user.favorites}}" onclick="favorite(this)" class="fa fa-heart fa-heart-o">3</i>
   </div>
   <div class="col-md-7 p-2 content" snodeid="{{snode.id}}" onclick="clickcopy(this)">
     <pre class="border p-2 rounded">{{snode.content}}</pre>
