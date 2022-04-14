@@ -409,61 +409,57 @@ router.get("/search", withAuth, async (req, res) => {
   }
 });
 
-// router.get("/search/advanced", withAuth, async (req, res) => {
-//   try {
-//     console.log(req.query.q);
-//     const searchArr = req.query.q.split(" ");
+router.get("/search/advanced", withAuth, async (req, res) => {
+  try {
+    console.log(req.query.q);
+    const searchArr = req.query.q.split(" ");
 
-//     const searchArrObj = searchArr.reduce(function (acc, tag) {
-//       return [...acc, {tag_name: tag}];
-//     }, []);
+    const searchArrObj = searchArr.reduce(function (acc, tag) {
+      return [...acc, {tag_name: tag}];
+    }, []);
 
-//     console.log(searchArrObj);
-//     // Query: Find all Tags with ALL of the search parameters. Include the codesnips associated. Include the user associated with each codesnip.
-    
-// let snodeData = [];
+    console.log(searchArrObj);
 
-//   bigSnodeData = await Tag.findAll({
-//           where: {
-//             [Op.or]: tag,
-//           },
-//           include: [
-//             {
-//               model: Codesnip,
-//               include: [
-//                 {
-//                   model: User,
-//                 },
-//                 {
-//                   model: Tag,
-//                 },
-//               ],
-//             },
-//           ],
-//         });
+    tagData = await Tag.findAll({
+      where: {
+        [Op.or]: searchArrObj,
+      },
+      include: [
+        {
+          model: Codesnip,
+          include: [
+            {
+              model: User,
+            },
+            {
+              model: Tag,
+            },
+          ],
+        },
+      ],
+    });
 
-    
+    const tagResults = tagData.map((snode) => snode.get({plain: true}));
+    const snodes = tagResults.map((tag) => tag.codesnips).flat();
 
-//     const tagResults = tagData.map((snode) => snode.get({plain: true}));
-//     const snodes = tagResults.map((tag) => tag.codesnips).flat();
+console.log(snodes);
+    userData = await User.findByPk(req.session.user_id);
 
-//     userData = await User.findByPk(req.session.user_id);
+    const user = userData.get({plain: true});
 
-//     const user = userData.get({plain: true});
+    // // Pass serialized data and session flag into template
+    res.render("search", {
+      snodes,
+      user,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
 
-//     // // Pass serialized data and session flag into template
-//     res.render("search", {
-//       snodes,
-//       user,
-//       user_id: req.session.user_id,
-//       logged_in: req.session.logged_in,
-//     });
-
-//     // res.json(codesnips);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    // res.json(codesnips);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
