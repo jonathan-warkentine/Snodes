@@ -2,13 +2,11 @@ const router = require('express').Router();
 const { Tag } = require('../../models');
 const withAuth = require("../../utils/auth.js");
 
-router.get("/", withAuth, async (req, res) => {
+router.get("/", async (req, res) => {
     try {
       tagData = await Tag.findAll();
   
-      const tags = tagData.get({plain: true});
-      
-      res.json(tags);
+      res.json(tagData);
     } catch (err) {
       res.status(500).json(err);
     }

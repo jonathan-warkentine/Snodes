@@ -1,3 +1,6 @@
+{{!-- link for heart icons --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
 <!-- Loop over each object in the snodes array -->
 {{#if snodes}}
 {{#each snodes as |snode|}}
@@ -10,9 +13,9 @@
       <p class="p-1 pl-2 favCount">{{snode.favorited}}</p>
     </div>
   </div>
-  <div class="col-md-7 p-2 content" snodeid="{{snode.id}}" onclick="clickcopy(this)">
-    <pre class="border p-2 rounded bg-white">{{snode.content}}</pre>
-    <button>📋 Click Anywhere to Copy</button>
+  <div class="col-md-7 p-2 content" snodeid="{{snode.id}}">
+    <pre class="border p-2 rounded bg-white" onclick="clickcopy(this.parentElement)">{{snode.content}}</pre>
+    <button onclick="clickcopy(this.parentElement)">📋 Click to Copy</button>
     <p class="mt-4">Tags: {{extract_tagNames snode.tags}}</p>
   </div>
 </div>
