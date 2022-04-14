@@ -263,6 +263,7 @@ router.get("/profile/:id", withAuth, async (req, res) => {
 // Gets the requested user's favorite snodes sends them to the profile.handlebars PERSONAL
 router.get("/profile/favorite/:id", withAuth, async (req, res) => {
   try {
+    let snodes = [];
     allData = await User.findAll({
       where: {
         id: req.params.id,
@@ -270,7 +271,24 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
     });
 
     const allData2 = allData.map((user) => user.get({plain: true}));
+    
+if (allData2[0].favorites == null) {
+  console.log(snodes)
+  userData = await User.findByPk(req.session.user_id);
 
+    const user = userData.get({plain: true});
+
+    profileUserData = await User.findByPk(req.params.id);
+
+    const profileUser = profileUserData.get({plain: true});
+  res.render("profile", {
+    snodes,
+    user,
+    profileUser,
+    user_id: req.session.user_id,
+    logged_in: req.session.logged_in,
+  });
+} else {
     const favString = allData2[0].favorites;
     const favArrStrings = favString.split(",");
     const favArr = favArrStrings.map((element) => parseInt(element));
@@ -293,7 +311,7 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
       ],
     });
 
-    const snodes = favSnodeData.map((snode) => snode.get({plain: true}));
+    snodes = favSnodeData.map((snode) => snode.get({plain: true}));
 
     userData = await User.findByPk(req.session.user_id);
 
@@ -311,7 +329,7 @@ router.get("/profile/favorite/:id", withAuth, async (req, res) => {
       user_id: req.session.user_id,
       logged_in: req.session.logged_in,
     });
-
+  }
     // res.json(favSnodes);
   } catch (err) {
     res.status(500).json(err);
@@ -387,6 +405,62 @@ router.get("/search", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// router.get("/search/advanced", withAuth, async (req, res) => {
+//   try {
+//     console.log(req.query.q);
+//     const searchArr = req.query.q.split(" ");
+
+//     const searchArrObj = searchArr.reduce(function (acc, tag) {
+//       return [...acc, {tag_name: tag}];
+//     }, []);
+
+//     console.log(searchArrObj);
+//     // Query: Find all Tags with ALL of the search parameters. Include the codesnips associated. Include the user associated with each codesnip.
+    
+// let snodeData = [];
+
+//   bigSnodeData = await Tag.findAll({
+//           where: {
+//             [Op.or]: tag,
+//           },
+//           include: [
+//             {
+//               model: Codesnip,
+//               include: [
+//                 {
+//                   model: User,
+//                 },
+//                 {
+//                   model: Tag,
+//                 },
+//               ],
+//             },
+//           ],
+//         });
+
+    
+
+//     const tagResults = tagData.map((snode) => snode.get({plain: true}));
+//     const snodes = tagResults.map((tag) => tag.codesnips).flat();
+
+//     userData = await User.findByPk(req.session.user_id);
+
+//     const user = userData.get({plain: true});
+
+//     // // Pass serialized data and session flag into template
+//     res.render("search", {
+//       snodes,
+//       user,
+//       user_id: req.session.user_id,
+//       logged_in: req.session.logged_in,
+//     });
+
+//     // res.json(codesnips);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
