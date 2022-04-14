@@ -8,8 +8,8 @@
   <div class="col-md-4">
     <h2>{{snode.description}}</a></h2>
     <p>Published by <a href="/profile/{{snode.user_id}}">{{snode.user.name}}</a> on {{format_date snode.date}}</p>
-    <div class="fav-status d-flex justify-content-start p-1">
-      <i snodeid="{{snode.id}}" isFav="{{if_contains snode.id ../user.favorites}}" onclick="favorite(this)" class="fa fa-heart fa-heart-o"></i>
+    <div class="fav-status d-flex justify-content-start p-2">
+      <i snodeid="{{snode.id}}" isFav="{{if_contains snode.id ../user.favorites}}" onclick="favorite(this)" class="fa fa-2x fa-heart fa-heart-o"></i>
       <p class="p-1 pl-2 favCount">{{snode.favorited}}</p>
     </div>
   </div>
