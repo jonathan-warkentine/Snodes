@@ -1,6 +1,6 @@
 <!-- Loop over each object in the snodes array -->
 {{#each snodes as |snode|}}
-<div class="row mb-5 pb-3 post bg-light">
+<div class="row mb-5 pb-3 pt-3 pl-2 post bg-light rounded">
   <div class="col-md-4">
     <h2>{{snode.description}}</a></h2>
     <p>Published by <a href="/profile/{{snode.user_id}}">{{snode.user.name}}</a> on {{format_date snode.date}}</p>

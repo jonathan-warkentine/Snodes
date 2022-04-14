@@ -51,3 +51,12 @@ document
 document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormHandler);
+  
+function toggleView(){
+  document.querySelector('#pills-login').classList.toggle('active');
+  document.querySelector('#pills-login').classList.toggle('show');
+  document.querySelector('#tab-login').classList.toggle('active');
+  document.querySelector('#tab-register').classList.toggle('active');
+  document.querySelector('#pills-register').classList.toggle('active');
+  document.querySelector('#pills-register').classList.toggle('show');
+};
