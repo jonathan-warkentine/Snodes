@@ -82,11 +82,11 @@ function autocomplete(inp, arr) {
             /*and simulate a click on the "active" item:*/
             if (x) x[currentFocus].click();
             else {
-                search(inp.value)
+                search(inp.value);
             } 
           }
           else {
-            search(inp.value)
+            search(inp.value);
             } 
         }
     });
