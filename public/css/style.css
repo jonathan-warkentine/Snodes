@@ -9,6 +9,8 @@ body{
 
 .post {
   margin: 20px;
+  border: 1px solid lightgray;
+  border-bottom: 2px solid black;
 }
 
 .no-button {

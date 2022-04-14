@@ -1,4 +1,4 @@
-  <header class="container-fluid rounded-top d-flex justify-content-between p-5 bg-primary">
+  <header class="container-fluid rounded-top d-flex flex-nowrap justify-content-between p-5 bg-primary">
       <h1>
         <a href="/" class="text-light">{ Snodes }</a>
       </h1>
@@ -14,17 +14,17 @@
   </header>
 
 <header class="container-fluid rounded-bottom bg-secondary sticky-top border-top">
-  <div class="row p-3 d-flex justify-content-between ">
-      <form id="search-form" class="col-auto d-flex flex-nowrap">
+  <div class="row d-flex justify-content-center justify-content-md-between p-3">
+      <form id="search-form" class="col-auto d-flex flex-nowrap p-2">
         <input id="searchbar" type="search" placeholder="Search Snodes..." class="rounded">
         <input type="submit" value="Search" class="ml-1 rounded">
       </form>
       <div class="col-1"></div>
-      <nav class="col-auto d-flex flex-nowrap align-items-center">  
-        <a class="text-light pr-2 d-flex align-items-center" href="/topsnodes">Top Snodes</a> |
+      <nav class="d-flex flex-wrap align-items-center p-2">  
+        <a class="text-light pr-2 align-items-center" href="/topsnodes">Top Snodes</a> |
         <a class="text-light pr-2 pl-2 align-items-center" href="/recents">Fresh Snodes</a> |
         <a class="text-light pr-2 pl-2 align-items-center" href="/tags">Top Cateogories</a> |
-        <a class="text-light pr-2 pl-2 align-items-center" href="/draftsnode">Post Your Snode!</a>
+        <a class="text-light pl-2 align-items-center" href="/draftsnode">Post Your Snode!</a>
       </nav>
   </div>
 </header>
