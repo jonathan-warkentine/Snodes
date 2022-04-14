@@ -16,6 +16,9 @@ router.get("/", async (req, res) => {
             model: User,
             attributes: ["name"],
           },
+          {
+            model: Tag,
+          },
         ],
         limit: 10,
       });
