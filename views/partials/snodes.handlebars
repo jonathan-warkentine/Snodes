@@ -1,4 +1,5 @@
 <!-- Loop over each object in the snodes array -->
+{{#if snodes}}
 {{#each snodes as |snode|}}
 <div class="row mb-5 pb-3 pt-3 pl-2 post bg-light rounded">
   <div class="col-md-4">
@@ -19,3 +20,13 @@
 
 <script src="/js/copySnode.js"></script>
 <script src="/js/favorites.js"></script>
+{{else}}
+<div class="d-flex container justify-content-center">
+  <div class="row">
+    <h1 class="pr-3 align-self-end">{ </h1>
+    <h3 class="text-muted align-self-center"><i>No Snodes Here...</i></h3>
+    <h1 class="pl-3"> }</h1>
+  </div>
+</div>
+{{/if}}
+
