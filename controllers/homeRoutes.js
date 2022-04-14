@@ -440,9 +440,30 @@ router.get("/search/advanced", withAuth, async (req, res) => {
     });
 
     const tagResults = tagData.map((snode) => snode.get({plain: true}));
-    const snodes = tagResults.map((tag) => tag.codesnips).flat();
+    const bigSnodeData = tagResults.map((tag) => tag.codesnips).flat();
+console.log(bigSnodeData);
+   let snodes = [];
+
+    for (let i = 0; i < bigSnodeData.length; i++) {
+      let z = 0;
+      console.log('i = ' + i);
+      for (let k = 0; k < bigSnodeData[i].tags.length; k++) {
+        
+          for (let j = 0; j < searchArr.length; j++) {
+            console.log(bigSnodeData[i].tags[k].tag_name)
+             if (bigSnodeData[i].tags[k].tag_name.toLowerCase() == searchArr[j].toLowerCase()) {
+               z++;
+               console.log('z = ' + z)
+             }
+             if (z == searchArr.length) {
+                snodes.push(bigSnodeData[i]);
+             }
+         }
+      }
+    }
 
 console.log(snodes);
+
     userData = await User.findByPk(req.session.user_id);
 
     const user = userData.get({plain: true});
