@@ -8,5 +8,5 @@ advancedSearchEl.addEventListener('submit', advancedSearch);
 
 function advancedSearch (event){
     event.preventDefault();
-    window.location.replace(`./advancedsearch?q=${document.querySelector('#lang').value? document.querySelector('#lang').value + '%20': ""}${document.querySelector('#advanced-searchbar').value}`);
+    window.location.replace(`./search/advanced?q=${document.querySelector('#lang').value? document.querySelector('#lang').value + '%20': ""}${document.querySelector('#advanced-searchbar').value}`);
 }
