@@ -220,6 +220,37 @@ router.get("/favsnodes", withAuth, async (req, res) => {
   }
 });
 
+router.get("/snode/:id", withAuth, async (req, res) => {
+  try {
+    snodeData = await Codesnip.findAll({
+      where: {
+        id: req.params.id
+      },
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Tag,
+        },
+      ]});
+
+    const snodes = snodeData.map((snode) =>
+      snode.get({plain: true})
+    );
+
+    res.render("search", {
+      snodes,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
+
+    // res.json(personalSnodes);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get("/profile/:id", withAuth, async (req, res) => {
   try {
     personalSnodeData = await Codesnip.findAll({
