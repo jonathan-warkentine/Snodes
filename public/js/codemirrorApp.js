@@ -38,7 +38,7 @@ function submitSnode(event){
         .then(result => result.status == 200? submitStatus(true): submitStatus(false));
     }
     else {
-        $('#inputs').append('<h4 class="text-danger text-center">Check Your Input and Try Again</h4>')
+        $('#inputs').append('<h4 class="text-danger text-center m-5 p-2">Check Your Input and Try Again</h4>')
     }
     
 
@@ -51,5 +51,4 @@ function submitStatus(success){
         $('#draft').addClass('text-center');
         $('#draft').append('<h2 class="text-success text-center">Snode Successfully Submitted!</h2>')
     }
-
 }

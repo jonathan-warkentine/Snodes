@@ -1,10 +1,13 @@
 {{#each tags as |tag|}}
-<div class="row mb-4 post">
+<div class="row mb-4 p-3 post">
   <div class="col-md-5">
     <h3 style="text-decoration: underline;" class="text-primary pb-3">{{tag.tag_name}}:</h3>
-    {{#each tag.codesnips as |snode|}}
-      <a class="text-secondary" href="/snode/{{snode.id}}">{{snode.description}}</a>
-    {{/each}}
+    <div class="d-flex flex-nowrap">
+        {{#each tag.codesnips as |snode|}}
+        <a class="text-secondary pr-3" href="/snode/{{snode.id}}">{{snode.description}}</a><br>    
+        {{/each}}
+    </div>
+    
   </div>
 </div>
 {{/each}}
