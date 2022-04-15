@@ -61,7 +61,17 @@ router.get("/", async (req, res) => {
 
 router.get("/snode/:snodeid", async (req, res) => {
   try {
-    let snodes = await Codesnip.findByPk(req.params.snodeid);
+    let snodes = await Codesnip.findByPk(req.params.snodeid, {
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+        {
+          model: Tag,
+        },
+      ],
+    });
     snodes = [snodes.get({plain: true})];
 
     const userData = await User.findByPk(req.session.user_id);
