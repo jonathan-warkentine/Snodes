@@ -19,7 +19,8 @@ function submitSnode(event){
     
     const description = document.getElementById('description').value;
     const content = codeareaEl.value;
-    const tags = document.getElementById('tags').value;
+    let tags = document.getElementById('tags').value;
+    tags = tags.replaceAll(',', '');
 
     if (description && content && tags) {
         const snode = {
