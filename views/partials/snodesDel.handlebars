@@ -18,6 +18,13 @@
     <button onclick="clickcopy(this.parentElement)">📋 Click to Copy</button>
     <p class="mt-4">Tags: {{extract_tagNames snode.tags}}</p>
   </div>
+  {{#if (ifEquals snode.user_id ../user_id)}}
+  <div class="col-auto d-flex align-items-center justify-content-center mr-3">
+    <div class="row">
+      <button onclick="del(this, {{snode.id}})" class="btn btn-danger delete">Delete</button>  
+    </div>
+  </div>
+  {{/if}}
 </div>
 {{/each}}
 
@@ -33,4 +40,3 @@
   </div>
 </div>
 {{/if}}
-
