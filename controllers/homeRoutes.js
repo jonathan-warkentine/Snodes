@@ -409,61 +409,78 @@ router.get("/search", withAuth, async (req, res) => {
   }
 });
 
-// router.get("/search/advanced", withAuth, async (req, res) => {
-//   try {
-//     console.log(req.query.q);
-//     const searchArr = req.query.q.split(" ");
+router.get("/search/advanced", withAuth, async (req, res) => {
+  try {
+    console.log(req.query.q);
+    const searchArr = req.query.q.split(" ");
 
-//     const searchArrObj = searchArr.reduce(function (acc, tag) {
-//       return [...acc, {tag_name: tag}];
-//     }, []);
+    const searchArrObj = searchArr.reduce(function (acc, tag) {
+      return [...acc, {tag_name: tag}];
+    }, []);
 
-//     console.log(searchArrObj);
-//     // Query: Find all Tags with ALL of the search parameters. Include the codesnips associated. Include the user associated with each codesnip.
-    
-// let snodeData = [];
+    console.log(searchArrObj);
 
-//   bigSnodeData = await Tag.findAll({
-//           where: {
-//             [Op.or]: tag,
-//           },
-//           include: [
-//             {
-//               model: Codesnip,
-//               include: [
-//                 {
-//                   model: User,
-//                 },
-//                 {
-//                   model: Tag,
-//                 },
-//               ],
-//             },
-//           ],
-//         });
+    tagData = await Tag.findAll({
+      where: {
+        [Op.or]: searchArrObj,
+      },
+      include: [
+        {
+          model: Codesnip,
+          include: [
+            {
+              model: User,
+            },
+            {
+              model: Tag,
+            },
+          ],
+        },
+      ],
+    });
 
-    
+    const tagResults = tagData.map((snode) => snode.get({plain: true}));
+    const bigSnodeData = tagResults.map((tag) => tag.codesnips).flat();
+console.log(bigSnodeData);
+   let snodes = [];
 
-//     const tagResults = tagData.map((snode) => snode.get({plain: true}));
-//     const snodes = tagResults.map((tag) => tag.codesnips).flat();
+    for (let i = 0; i < bigSnodeData.length; i++) {
+      let z = 0;
+      console.log('i = ' + i);
+      for (let k = 0; k < bigSnodeData[i].tags.length; k++) {
+        
+          for (let j = 0; j < searchArr.length; j++) {
+            console.log(bigSnodeData[i].tags[k].tag_name)
+             if (bigSnodeData[i].tags[k].tag_name.toLowerCase() == searchArr[j].toLowerCase()) {
+               z++;
+               console.log('z = ' + z)
+             }
+             if (z == searchArr.length) {
+                snodes.push(bigSnodeData[i]);
+             }
+         }
+      }
+    }
 
-//     userData = await User.findByPk(req.session.user_id);
+console.log(snodes);
 
-//     const user = userData.get({plain: true});
+    userData = await User.findByPk(req.session.user_id);
 
-//     // // Pass serialized data and session flag into template
-//     res.render("search", {
-//       snodes,
-//       user,
-//       user_id: req.session.user_id,
-//       logged_in: req.session.logged_in,
-//     });
+    const user = userData.get({plain: true});
 
-//     // res.json(codesnips);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    // // Pass serialized data and session flag into template
+    res.render("search", {
+      snodes,
+      user,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
+
+    // res.json(codesnips);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
