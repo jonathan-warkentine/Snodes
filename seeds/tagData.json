@@ -1,26 +1,284 @@
 [
-    {
-      "tag_name": "Array"
-    },
-    {
-        "tag_name": "Object"
-    },
-    {
-        "tag_name": "Javascript"
+      {
+       "tag_name": "Array"
       },
       {
-          "tag_name": "HTML"
+       "tag_name": "Object"
+      },
+      {
+       "tag_name": "Javascript"
+      },
+      {
+        "tag_name": "HTML"
       },
       {
         "tag_name": "CSS"
       },
       {
-          "tag_name": "C#"
+        "tag_name": "C#"
       },
       {
         "tag_name": "jQuery"
       },
       {
-          "tag_name": "String"
+        "tag_name": "String"
+      },
+      {
+        "tag_name": "Typescript"
+      },
+      {
+        "tag_name": "Objective C"
+      },
+      {
+        "tag_name": "Express.js"
+      },
+      {
+        "tag_name": "SQL"
+      },
+      {
+        "tag_name": "API"
+      },
+      {
+        "tag_name": "Bootstrap"
+      },
+      {
+        "tag_name": "Angular"
+      },
+      {
+        "tag_name": "Ruby Rails"
+      },
+      {
+        "tag_name": "Golang"
+      },
+      {
+        "tag_name": "Scala"
+      },
+      {
+        "tag_name": "Java"
+      },
+      {
+        "tag_name": "Python"
+      },
+      {
+        "tag_name": "OOP"
+      },
+      {
+        "tag_name": "PHP"
+      },
+      {
+        "tag_name": "Front-End"
+      },
+      {
+        "tag_name": "Back-End"
+      },
+      {
+        "tag_name": "Node.js"
+      },
+      {
+        "tag_name": "Models"
+      },
+      {
+        "tag_name": "README"
+      },
+      {
+        "tag_name": "JSON"
+      },
+      {
+        "tag_name": "Query"
+      },
+      {
+        "tag_name": "Navigation"
+      },
+      {
+        "tag_name": "Variables"
+      },
+      {
+        "tag_name": "Array Methods"
+      },
+      {
+        "tag_name": "Math"
+      },
+      {
+        "tag_name": "Booleans"
+      },
+      {
+        "tag_name": "Maps"
+      },
+      {
+        "tag_name": "Loops"
+      },
+      {
+        "tag_name": "Views"
+      },
+      {
+        "tag_name": "Hosting"
+      },
+      {
+        "tag_name": "Data Types"
+      },
+      {
+        "tag_name": "Select"
+      },
+      {
+        "tag_name": "Methods"
+      },
+      {
+        "tag_name": "MySQL"
+      },
+      {
+        "tag_name": "SQL Server"
+      },
+      {
+        "tag_name": "MS Access"
+      },
+      {
+        "tag_name": "Oracle"
+      },
+      {
+        "tag_name": "Synase"
+      },
+      {
+        "tag_name": "Informix"
+      },
+      {
+        "tag_name": "Postgres"
+      },
+      {
+        "tag_name": "Let"
+      },
+      {
+        "tag_name": "Events"
+      },
+      {
+        "tag_name": "Number Methods"
+      },
+      {
+        "tag_name": "Dates"
+      },
+      {
+        "tag_name": "Switch"
+      },
+      {
+        "tag_name": "Loops"
+      },
+      {
+        "tag_name": "Classes"
+      },
+      {
+        "tag_name": "Arrow Function"
+      },
+      {
+        "tag_name": "If Else"
+      },
+      {
+        "tag_name": "Random"
+      },
+      {
+        "tag_name": "Operators"
+      },
+      {
+        "tag_name": "xcode"
+      },
+      {
+        "tag_name": "GET"
+      },
+      {
+        "tag_name": "OPEN"
+      },
+      {
+        "tag_name": "POST"
+      },
+      {
+        "tag_name": "git"
+      },
+      {
+        "tag_name": "azure"
+      },
+      {
+        "tag_name": "flutter"
+      },
+      {
+        "tag_name": "wordpress"
+      },
+      {
+        "tag_name": "facebook"
+      },
+      {
+        "tag_name": "google-maps"
+      },
+      {
+        "tag_name": "authentication"
+      },
+      {
+        "tag_name": "debugging"
+      },
+      {
+        "tag_name": "amazon-web-services"
+      },
+      {
+        "tag_name": "mongoose"
+      },
+      {
+        "tag_name": "curl"
+      },
+      {
+        "tag_name": "redirect"
+      },
+      {
+        "tag_name": "dom"
+      },
+      {
+        "tag_name": "logging"
+      },
+      {
+        "tag_name": "matrix"
+      },
+      {
+        "tag_name": "optimization"
+      },
+      {
+        "tag_name": "caching"
+      },
+      {
+        "tag_name": "memory"
+      },
+      {
+        "tag_name": "arraylist"
+      },
+      {
+        "tag_name": "cookies"
+      },
+      {
+        "tag_name": "input"
+      },
+      {
+        "tag_name": "data-structures"
+      },
+      {
+        "tag_name": "mobile"
+      },
+      {
+        "tag_name": "ssh"
+      },
+      {
+        "tag_name": ".net"
+      },
+      {
+        "tag_name": "swift"
+      },
+      {
+        "tag_name": "image"
+      },
+      {
+        "tag_name": "algorithm"
+      },
+      {
+        "tag_name": "apache"
+      },
+      {
+        "tag_name": "sqlite"
+      },
+      {
+        "tag_name": "vue.js"
       }
-  ]
+]
