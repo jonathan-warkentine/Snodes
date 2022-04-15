@@ -1,4 +1,6 @@
 var searchFormEl = document.getElementById("search-form");
+var searchbarEl = document.getElementById('searchbar');
+searchFormEl.addEventListener('submit', () => search(searchbarEl.value));
 
 fetch_tags();
 
@@ -6,7 +8,7 @@ function fetch_tags(){
     fetch('/api/tag')
     .then(response => response.json())
     .then(data => data.map(tag => tag.tag_name))
-    .then(tags => autocomplete(document.querySelector('#searchbar'), tags))
+    .then(tags => autocomplete(searchbarEl, tags))
     .catch( function(error){
         alert(error);
     });
