@@ -11,7 +11,7 @@
     ## Website of Deployed Application
 
     ## User Story
-    ```md
+    ```
     AS a fellow Programmer
     I WANT to be able to easily search code snips that are giving I as a developer problems
     SO THAT I can easily find solutions, see others code snippets, and view upvoted snippets that are useful
@@ -19,13 +19,13 @@
 
     ## Acceptance Criteria
 
-    ```md
+    ```
     GIVEN I am searching for a particular code snippet, function, line of code
     WHEN I open the application
     THEN I am presented with a page with a search bar to enter key tags for the code or lines I am inquiring and a simple user interface
     WHEN I enter a search criteria, with auto generated popular searches
     THEN I can see the code/ snippet that others have posted
-    WHEN I view these code snippets, I am presented with upvotes and who posted these snippets, along with a copy function for accessibility
+    WHEN I view these code snippets, I am presented with upvotes and who posted these snippets
     GIVEN I made a login,
     WHEN i am able to access my profile
     THEN I am able to view my favorite snips, and my posted snippets
