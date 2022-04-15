@@ -1,6 +1,6 @@
 var searchFormEl = document.getElementById("search-form");
 var searchbarEl = document.getElementById('searchbar');
-searchFormEl.addEventListener('submit', () => search(searchbarEl.value));
+searchFormEl.addEventListener('submit', event => search(undefined, event));
 
 fetch_tags();
 
@@ -14,7 +14,8 @@ function fetch_tags(){
     });
 };
 
-function search (query){
+function search (query=searchbarEl.value, event){
+    event? event.preventDefault(): null;
     window.location.replace(`/search?q=${query}`);
 }
 

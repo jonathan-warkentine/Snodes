@@ -59,6 +59,27 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/snode/:snodeid", async (req, res) => {
+  try {
+    let snodes = await Codesnip.findByPk(req.params.snodeid);
+    snodes = [snodes.get({plain: true})];
+
+    const userData = await User.findByPk(req.session.user_id);
+    const user = userData.get({plain: true});
+
+    // Pass serialized data and session flag into template
+    res.render("homepage", {
+      snodes,
+      user,
+      user_id: req.session.user_id,
+      logged_in: req.session.logged_in,
+    });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // Return the top Snodes sorted with most favorited on top
 router.get("/topsnodes", withAuth, async (req, res) => {
   try {
@@ -462,7 +483,8 @@ console.log(bigSnodeData);
       }
     }
 
-console.log(snodes);
+    //remove duplicates by looking for repeated snode.id's
+    snodes = snodes.filter((snode, index) => snodes.map(snode => snode.id).indexOf(snode.id)==index);
 
     userData = await User.findByPk(req.session.user_id);
 
