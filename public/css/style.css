@@ -1,34 +1,16 @@
-header, .blogpost:not(:last-child) {
+body{
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.sticky-top, .post:not(:last-child) {
   border-bottom: 2px solid rgb(17, 9, 9);
 }
 
-header {
-  background-color: #b9b3b3;
-  padding-left: 50px;
-  padding-right: 10px;
-}
-
-.declare {
+.post {
   margin: 20px;
-  font-weight: 900;
-  font-size: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.comments-section {
-  background-color: #b9b3b3;
-  margin: 20px;
-  padding: 10px;
-}
-
-.comment {
-  background-color: #b9b3b3;
-  margin: 20px;
-}
-
-.blogpost {
-  margin: 20px;
+  border: 1px solid lightgray;
+  border-bottom: 2px solid black;
 }
 
 .no-button {
@@ -36,12 +18,73 @@ header {
   border: none;
   padding: 0;
   cursor: pointer;
-  color: #bc2e1b;
+  color: lightgrey;
   text-decoration: none;
   font-size: 100%;
 }
 
 .no-button:hover {
-  color: #bc961b;
+  color: black;
   text-decoration: underline;
+}
+
+/* Autocomplete */
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+}
+input[type=text] {
+  background-color: #f1f1f1;
+}
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 2px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+/* FA Icons */
+
+.fa{
+  font-size:30px;
+  color:red;
+}
+
+.fa:hover{
+  cursor: pointer;
 }

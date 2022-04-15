@@ -1,0 +1,27 @@
+<div class="row d-flex justify-content-center">
+    <form id="advanced-search-form" class="col-auto mb-5 pb-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="lang">Language:</label>
+            </div>
+            <select class="custom-select" id="lang">
+                <option value="" selected>Languages...</option>
+                <option value="javascript">JavaScript</option>
+                <option value="css">CSS</option>
+                <option value="html">HTML</option>
+                <option value="python">Python</option>
+                <option value="java">Java</option>
+                <option value="mysql">MySQL</option>
+                <option value="bootstrap">Bootstrap</option>
+            </select>
+        </div>
+        <div class="row d-flex justify-content-between flex-nowrap w-100">
+            <input autocomplete="off" id="advanced-searchbar" type="search" placeholder="Advanced Search" class="rounded p-1 mr-1">
+            <input type="submit" value="Search" class="btn m-0">
+        </div>
+    </form>
+</div>
+
+<script src="/js/advanced_search.js"></script>
+
+{{> snodes}}

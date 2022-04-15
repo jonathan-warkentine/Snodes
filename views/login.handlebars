@@ -1,42 +1,106 @@
-<div class="row">
-  <div class="col-md-6">
-    <h2>Login</h2>
+<div class="row d-flex justify-content-center">
+  <div class="col-11 col-sm-9 col-md-6 col-lg-4 border rounded p-3">
+      <!-- Pills navs -->
+      <ul class="nav nav-pills nav-justified mb-4" role="tablist">
+        <li class="nav-item border rounded m-1" role="presentation">
+          <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#" role="tab" onclick="toggleView()"
+            aria-controls="pills-login" aria-selected="true">Login</a>
+        </li>
+        <li class="nav-item border rounded m-1" role="presentation">
+          <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#" role="tab" onclick="toggleView()"
+            aria-controls="pills-register" aria-selected="false">Register</a>
+        </li>
+      </ul>
+      <!-- Pills navs -->
 
-    <form class="form login-form">
-      <div class="form-group">
-        <label for="email-login">email:</label>
-        <input class="form-input" type="text" id="email-login" />
-      </div>
-      <div class="form-group">
-        <label for="password-login">password:</label>
-        <input class="form-input" type="password" id="password-login" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
-      </div>
-    </form>
-  </div>
-  <div class="col-md-6">
-    <h2>Signup</h2>
+      <!-- Pills content -->
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+          <form class="login-form">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="email-login" class="form-control" />
+              <label class="form-label" for="email-login">Email</label>
+            </div>
 
-    <form class="form signup-form">
-      <div class="form-group">
-        <label for="name-signup">name:</label>
-        <input class="form-input" type="text" id="name-signup" />
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="password-login" class="form-control" />
+              <label class="form-label" for="password-login">Password</label>
+            </div>
+
+            <!-- 2 column grid layout -->
+            <div class="row mb-4">
+              <div class="col-md-6 d-flex justify-content-center">
+                <!-- Checkbox -->
+                <div class="form-check mb-3 mb-md-0">
+                  <input class="form-check-input" type="checkbox" value="" id="loginCheck" />
+                  <label class="form-check-label" for="loginCheck"> Remember me </label>
+                </div>
+              </div>
+
+              <div class="col-md-6 d-flex justify-content-center">
+                <!-- Simple link -->
+                <a href="https://c.tenor.com/Zd_AFAgoTFIAAAAd/well-thats-too-bad-saturday-night-live.gif">Forgot password?</a>
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+            <!-- Register buttons -->
+            <div class="text-center">
+              <p>Not a member? <a href="#!" onclick="toggleView()">Register</a></p>
+            </div>
+          </form>
+        </div>
+
+        {{!-- Register Pane --}}
+        <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+          <form class="signup-form">
+            
+            <!-- Name input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="name-signup" class="form-control" />
+              <label class="form-label" for="name-signup">Name</label>
+            </div>
+
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="email-signup" class="form-control" />
+              <label class="form-label" for="email-signup">Email</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="password-signup" class="form-control" />
+              <label class="form-label" for="password-signup">Password</label>
+            </div>
+
+            <!-- Repeat Password input -->
+            <div class="form-outline mb-4">
+              <input type="password" id="registerRepeatPassword" class="form-control" />
+              <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+            </div>
+
+            <!-- Checkbox -->
+            <div class="form-check d-flex flex-wrap justify-content-start mb-4">
+              <input class="form-check-input me-2" type="checkbox" id="registerCheck"
+                aria-describedby="registerCheckHelpText" />
+              <label class="form-check-label" for="registerCheck">
+                I have read and agree to the terms
+              </label>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="email-signup">email:</label>
-        <input class="form-input" type="text" id="email-signup" />
-      </div>
-      <div class="form-group">
-        <label for="password-signup">password:</label>
-        <input class="form-input" type="password" id="password-signup" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
-      </div>
-    </form>
-  </div>
+      <!-- Pills content -->
+  </div> 
 </div>
+
+
 
 <script src="./js/login.js"></script>

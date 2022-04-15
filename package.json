@@ -1,6 +1,6 @@
 {
-  "name": "tech-blog",
-  "version": "1.0.0",
+  "name": "Snodes",
+  "version": "1.1.1",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "codemirror": "^5.65.2",
     "connect-session-sequelize": "^7.0.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

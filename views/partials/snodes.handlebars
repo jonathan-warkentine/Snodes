@@ -1,0 +1,35 @@
+{{!-- link for heart icons --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+<!-- Loop over each object in the snodes array -->
+{{#if snodes}}
+{{#each snodes as |snode|}}
+<div class="row mb-5 pb-3 pt-3 pl-2 post bg-light rounded">
+  <div class="col-md-4">
+    <h2>{{snode.description}}</a></h2>
+    <p>Published by <a href="/profile/{{snode.user_id}}">{{snode.user.name}}</a> on {{format_date snode.date}}</p>
+    <div class="fav-status d-flex justify-content-start p-2">
+      <i snodeid="{{snode.id}}" isFav="{{if_contains snode.id ../user.favorites}}" onclick="favorite(this)" class="fa fa-2x fa-heart fa-heart-o"></i>
+      <p class="p-1 pl-2 favCount">{{snode.favorited}}</p>
+    </div>
+  </div>
+  <div class="col-md-7 p-2 content" snodeid="{{snode.id}}">
+    <pre class="border p-2 rounded bg-white" onclick="clickcopy(this.parentElement)">{{snode.content}}</pre>
+    <button onclick="clickcopy(this.parentElement)">📋 Click to Copy</button>
+    <p class="mt-4">Tags: {{extract_tagNames snode.tags}}</p>
+  </div>
+</div>
+{{/each}}
+
+<script src="/js/copySnode.js"></script>
+<script src="/js/favorites.js"></script>
+{{else}}
+<div class="d-flex container justify-content-center">
+  <div class="row">
+    <h1 class="pr-3 align-self-end">{ </h1>
+    <h3 class="text-muted align-self-center"><i>No Snodes Here...</i></h3>
+    <h1 class="pl-3"> }</h1>
+  </div>
+</div>
+{{/if}}
+

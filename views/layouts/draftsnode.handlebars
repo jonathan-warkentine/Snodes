@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snodes</title>
+  <link rel="icon" href="images/code.png" >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  {{!-- CODE MIRROR APP LINKS (source: https://codemirror.net/) --}}
+  <link rel="stylesheet" href="./codemirror-5.65.2/lib/codemirror.css">
+  <link rel="stylesheet" href="./codemirror-5.65.2/addon/search/matchesonscrollbar.css">
+  <script src="./codemirror-5.65.2/lib/codemirror.js"></script>
+  <script src="./codemirror-5.65.2/mode/meta.js"></script>
+
+  <script src="./codemirror-5.65.2/addon/edit/matchbrackets.js"></script>
+  <script src="./codemirror-5.65.2/addon/edit/closebrackets.js"></script>
+  <script src="./codemirror-5.65.2/addon/scroll/annotatescrollbar.js"></script>
+  <script src="./codemirror-5.65.2/addon/search/matchesonscrollbar.js"></script>
+  <script src="./codemirror-5.65.2/addon/search/searchcursor.js"></script>
+  <script src="./codemirror-5.65.2/addon/search/match-highlighter.js"></script>
+</head>
+
+<body>
+    <div class="flex-column justify-space-around">
+      {{> header}}
+      <main class="container container-fluid mt-5">
+        <!-- Render the sub layout -->
+        {{{ body }}}
+      </main>
+      <footer>
+        
+      </footer>
+  </div>
+
+  <!-- Render script for logged in users only -->
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+  {{!-- Bootstrap scripts --}}
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>
