@@ -16,7 +16,7 @@ function fetch_tags(){
 
 function search (query=searchbarEl.value, event){
     event? event.preventDefault(): null;
-    window.location.replace(`/search?q=${query}`);
+    window.location.replace(`/search?q=${query.trim()}`);
 }
 
 
