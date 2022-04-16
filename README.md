@@ -1,4 +1,4 @@
-# Snode
+# Snode  ![MIT](https://img.shields.io/badge/license-MIT-green)
    ## Overview
 
    Hey, we are Cubicle-Gigglers. Programming can be tough and sometimes it is hard to find a specific line of code that you need to get your application working. Our App Snode allows users to look at code snippets to quickly find code applicable to whatever application they are working on. They also have the ability to upvote and downvote code that is most helpful for them. This allows for the most used or searched code snippets to populate based off of popularity. Our team Cubicle-Gigglers is made up of some of the best programmers to come out of the full stack web developer boot camp at Georgia Tech. 
